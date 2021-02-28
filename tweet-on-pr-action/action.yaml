@@ -1,0 +1,16 @@
+name: "Tweet on PR Action"
+description: "Send a celebratory tweet when someone creates a PR"
+author: "Jessica Greene"
+inputs:
+  githubUser:
+    description: "The github handle of the user who opened the PR"
+    default: "unknown user"
+  githubRepo:
+    description: "The github repository where the PR was opened"
+    default: "sleepypioneer/actions_to_celebrate"
+outputs:
+  status:
+    description: "Status"
+runs:
+  using: "docker"
+  image: "Dockerfile"
