@@ -36,14 +36,15 @@ def read_json(filepath):
 def main():
     # search a pull request that triggered this action
     gh = Github(os.getenv('GITHUB_TOKEN'))
-    if os.getenv('GITHUB_EVENT_PATH') is None:
+    event_path = os.getenv('GITHUB_EVENT_PATH')
+    if event_path is None:
         print('::set-output name=status::FAIL')
         sys.exit(0)
 
-    event = read_json(os.getenv('GITHUB_EVENT_PATH'))
-    print(f'EVENT: {event}')
+    print(f'EVENT PATH: {event_path}')
+    event = read_json(event_path)
     branch_label = ''
-    if event['pull_request']:
+    if event['pull_request'] is not None:
       branch_label = event['pull_request']['head']['label']  # author:branch
       author = branch_label.split(':')[0]
       repo = gh.get_repo(event['repository']['full_name'])
