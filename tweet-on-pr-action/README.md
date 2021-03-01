@@ -30,7 +30,7 @@ jobs:
   tweet:
     runs-on: ubuntu-latest
     steps:
-      - uses: sleepypioneer/tweet-on-pr-action@master
+      - uses: sleepypioneer/tweet-on-pr-action@main
         with:
           consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
