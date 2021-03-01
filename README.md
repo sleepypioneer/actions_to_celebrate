@@ -24,14 +24,15 @@ Provide the authentication keys and tokens for your Twitter app as the consumer-
 Example:
 
 ``` yml
-name: Send a Tweet
-on: [pull_request]
+name: example
+on: pull_request
 jobs:
-  tweet:
+  comment:
+    name: Add checkout and pull commands
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: sleepypioneer/tweet-on-pr-action@main
+      - uses: actions/checkout@v2
+      - uses: sleepypioneer/actions_to_celebrate@main
         with:
           consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}

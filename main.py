@@ -33,10 +33,13 @@ def read_json(filepath):
 def main():
   # search a pull request that triggered this action
   gh = Github(os.getenv('GITHUB_TOKEN'))
+  if os.getenv('GITHUB_EVENT_PATH') is None:
+      print('::set-output name=status::FAIL')
+      sys.exit(0)
+
   event = read_json(os.getenv('GITHUB_EVENT_PATH'))
   branch_label = event['pull_request']['head']['label']  # author:branch
   author = branch_label.split(':')[0]
-  # branch_name = branch_label.split(':')[-1]
   repo = gh.get_repo(event['repository']['full_name'])
 
   auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
