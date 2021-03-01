@@ -49,8 +49,6 @@ def main():
 
     branch_label = event['pull_request']['head']['label']  # author:branch
     author = branch_label.split(':')[0]
-    branch_label = event['push']['head']['label']  # author:branch
-    author = branch_label.split(':')[0]
 
     repo = gh.get_repo(event['repository']['full_name'])
 

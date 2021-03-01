@@ -1,12 +1,12 @@
 name: example
-on: [push]
+on: pull_request
 jobs:
   comment:
     name: Add checkout and pull commands
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: sleepypioneer/actions_to_celebrate@add-lint-workflow
+      - uses: sleepypioneer/actions_to_celebrate@main
         with:
           consumer-key: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_API_SECRET }}
