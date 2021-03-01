@@ -1,5 +1,5 @@
 name: example
-on: [push, pull_request]
+on: [push]
 jobs:
   comment:
     name: Add checkout and pull commands
