@@ -44,21 +44,31 @@ def main():
     print(f'EVENT PATH: {event_path}')
     event = read_json(event_path)
     branch_label = ''
-    if event['pull_request'] is not None:
+    author = ''
+    if 'pull_request' in event:
       branch_label = event['pull_request']['head']['label']  # author:branch
       author = branch_label.split(':')[0]
-      repo = gh.get_repo(event['repository']['full_name'])
+    elif 'push' in event:
+      branch_label = event['push']['head']['label']  # author:branch
+      author = branch_label.split(':')[0]
 
-      auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
-      auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    if branch_label is '' or author is '':
+        print('::set-output name=status::FAIL')
+        sys.exit(0)
+                
+    repo = gh.get_repo(event['repository']['full_name'])
 
-      api = tweepy.API(auth)
+    auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
-      tweet = f'Congratulations {author} on opening a pull request' + \
-          f' on the repository: {repo}!! Time to celebrate!!'
-      # status = api.update_status(status=tweet)
-      print(tweet)
-      print(f'::set-output name=status::{status}')
+    api = tweepy.API(auth)
+
+    tweet = f'Congratulations @{author} on opening a pull request' + \
+        f' on the repository: {repo.full_name}!! Time to celebrate!!' + \
+        '* This tweet was sent courtesy of actions_to_celebrate github action'
+    # status = api.update_status(status=tweet)
+    print(tweet)
+    # print(f'::set-output name=status::{status}')
       
 
     # sys.exit(0)
