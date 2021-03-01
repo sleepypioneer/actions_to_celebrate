@@ -61,7 +61,8 @@ def main():
 
     tweet = f'Congratulations @{author} on opening a pull request' + \
         f' on the repository: {repo.full_name} Time to celebrate!!' + \
-        ' *This tweet was sent courtesy of actions_to_celebrate github action 💜'
+        ' *This tweet was sent courtesy of actions_to_celebrate ' + \
+        'github action 💜'
 
     status = api.update_status(status=tweet)
     print(f'::set-output name=status::{status}')
