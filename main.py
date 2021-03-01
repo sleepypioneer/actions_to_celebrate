@@ -41,20 +41,24 @@ def main():
         sys.exit(0)
 
     event = read_json(os.getenv('GITHUB_EVENT_PATH'))
-    branch_label = event['pull_request']['head']['label']  # author:branch
-    author = branch_label.split(':')[0]
-    repo = gh.get_repo(event['repository']['full_name'])
+    print(f'EVENT: {event}')
+    branch_label = ''
+    if event['pull_request']:
+      branch_label = event['pull_request']['head']['label']  # author:branch
+      author = branch_label.split(':')[0]
+      repo = gh.get_repo(event['repository']['full_name'])
 
-    auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
-    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+      auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
+      auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
-    api = tweepy.API(auth)
+      api = tweepy.API(auth)
 
-    tweet = f'Congratulations {author} on opening a pull request' + \
-        f' on the repository: {repo}!! Time to celebrate!!'
-    # status = api.update_status(status=tweet)
-    print(tweet)
-    print(f'::set-output name=status::{status}')
+      tweet = f'Congratulations {author} on opening a pull request' + \
+          f' on the repository: {repo}!! Time to celebrate!!'
+      # status = api.update_status(status=tweet)
+      print(tweet)
+      print(f'::set-output name=status::{status}')
+      
 
     # sys.exit(0)
 
