@@ -4,6 +4,7 @@ ADD . /app
 WORKDIR /app
 
 RUN pip install tweepy
+RUN pip install PyGithub
 
 # A distroless container image with Python and some basics like SSL certificates
 # https://github.com/GoogleContainerTools/distroless

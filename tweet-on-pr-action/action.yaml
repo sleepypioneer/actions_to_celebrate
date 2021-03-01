@@ -2,15 +2,32 @@ name: "Tweet on PR Action"
 description: "Send a celebratory tweet when someone creates a PR"
 author: "Jessica Greene"
 inputs:
-  githubUser:
-    description: "The github handle of the user who opened the PR"
+  consumer-key:
+    description: >
+      Consumer API key, available in the "Keys and tokens"
+      section of your application in the Twitter Developer site.
+  consumer-secret:
+    description: >
+      Consumer API secret key, available in the "Keys and tokens"
+      section of your application in the Twitter Developer site.
+  access-token:
+    description: >
+      Application access token, available in the "Keys and tokens"
+      section of your application in the Twitter Developer site.
+  access-token-secret:
+    description: >
+      Application access token secret, available in the "Keys and tokens"
+      section of your application in the Twitter Developer site.
+  github-user:
+    description: >
+      "The github handle of the user who opened the PR"
     default: "unknown user"
-  githubRepo:
-    description: "The github repository where the PR was opened"
-    default: "sleepypioneer/actions_to_celebrate"
 outputs:
   status:
-    description: "Status"
+    description: "Status of whether tweet was sent"
 runs:
   using: "docker"
   image: "Dockerfile"
+branding:
+  icon: 'message-square'
+  color: yellow
