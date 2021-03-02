@@ -18,10 +18,6 @@ inputs:
     description: >
       Application access token secret, available in the "Keys and tokens"
       section of your application in the Twitter Developer site.
-  github-user:
-    description: >
-      "The github handle of the user who opened the PR"
-    default: "unknown user"
 outputs:
   status:
     description: "Status of whether tweet was sent"

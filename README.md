@@ -25,7 +25,7 @@ Example:
 
 ``` yml
 name: example
-on: pull_request
+on: [pull_request]
 jobs:
   comment:
     name: Add checkout and pull commands

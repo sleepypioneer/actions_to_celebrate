@@ -1,8 +1,8 @@
 name: example
-on: [push]
+on: [pull_request]
 jobs:
   comment:
-    name: Add checkout and pull commands
+    name: sends a tweet on pull requests being opened
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
