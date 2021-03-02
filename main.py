@@ -39,17 +39,15 @@ def main():
     event_path = os.getenv('GITHUB_EVENT_PATH')
     if event_path is None:
         print('::set-output name=status::FAIL')
-        sys.exit(0)
+        sys.exit(1)
 
     event = read_json(event_path)
 
     if 'pull_request' not in event:
         print('::set-output name=status::FAIL')
-        sys.exit(0)
+        sys.exit(1)
 
     branch_label = event['pull_request']['head']['label']  # author:branch
-    author = branch_label.split(':')[0]
-    branch_label = event['push']['head']['label']  # author:branch
     author = branch_label.split(':')[0]
 
     repo = gh.get_repo(event['repository']['full_name'])
